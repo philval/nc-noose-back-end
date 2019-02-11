@@ -1,4 +1,4 @@
-// npm run migrate:make
+// npm run migrate:make create_topics_table
 
 exports.up = function (knex, Promise) {
   console.log('creating topics table...');
