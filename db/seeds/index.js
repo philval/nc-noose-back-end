@@ -7,9 +7,9 @@ function timestampToDate(timestamp) {
 }
 
 function formatArticles(articles) {
-  return articles.map((article) => {
-    article.created_at = timestampToDate(article.created_at);
-    return article;
+  return articles.map(({ created_at, ...remainingArticle }) => {
+    // article.created_at = timestampToDate(article.created_at);
+    return { created_at: timestampToDate(created_at), ...remainingArticle };
   });
 }
 
@@ -18,9 +18,9 @@ function getArticleIDforComment(comment, returnedArticles) {
   return foundArticle.article_id;
 }
 
-// articleRows from Promise returning('*')
+// articleRows from returning('*')
 function formatComments(comments, articleRows) {
-  return comments.map(comment => ({ // map makes new object
+  return comments.map(comment => ({ // make new object
     author: comment.created_by, // renamed
     article_id: getArticleIDforComment(comment, articleRows), // lookup
     votes: comment.votes, // same
