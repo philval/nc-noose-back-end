@@ -22,7 +22,6 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       const formattedArticles = formatArticles(articleData);
-      console.log(formattedArticles);
       return knex('articles').insert(formattedArticles); // explicit return
     });
 };
