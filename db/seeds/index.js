@@ -6,11 +6,11 @@ function timestampToDate(timestamp) {
   return new Date(timestamp);
 }
 
+// Array of Objects
 function formatArticles(articles) {
-  return articles.map(({ created_at, ...remainingArticle }) => {
-    // article.created_at = timestampToDate(article.created_at);
-    return { created_at: timestampToDate(created_at), ...remainingArticle };
-  });
+  return articles.map(({ created_at, ...remainingArticle }) => (
+    { created_at: timestampToDate(created_at), ...remainingArticle }
+  ));
 }
 
 function getArticleIDforComment(comment, returnedArticles) {
@@ -44,6 +44,6 @@ exports.seed = function (knex, Promise) {
     })
     .then((articleRows) => {
       const formattedComments = formatComments(commentData, articleRows);
-      return knex('comments').insert(formattedComments); // explcit return
+      return knex('comments').insert(formattedComments); // explicit return
     });
 };

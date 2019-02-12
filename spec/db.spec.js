@@ -9,10 +9,7 @@ const connection = require('../db/connection');
 
 describe('/api', () => {
   // reseed DB before every it block
-  beforeEach('/api', () => connection.migrate
-    .rollback()
-    .then(() => connection.migrate.latest())
-    .then(() => connection.seed.run()));
+  beforeEach('/api', () => connection.seed.run());
 
   // close connection after all it blocks have completed
   after(() => connection.destroy());
