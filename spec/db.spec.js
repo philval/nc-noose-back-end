@@ -19,12 +19,14 @@ describe('/api', () => {
 
   // get array of objects back
   describe('/topics', () => {
-    it('GET responds with 200 and an array of topics length 3', () => request
+    it('GET responds with 200 and an array', () => request
       .get('/api/topics')
       .expect(200)
       .then(({ body }) => {
+        console.log(body);
         expect(body.topics).to.be.an('array');
-        expect(body.topics).to.have.length(2);
+        expect(body.topics[0]).to.contain.keys('slug', 'description');
+        expect(body.topics).to.have.length(2); // test data !
       }));
   });
 });
