@@ -3,8 +3,14 @@ const connection = require('../db/connection');
 
 exports.getArticles = (queryParams) => {
   // console.log(queryParams, '<< queryParams ');
-  const { author } = queryParams;
-  // console.log(author, '<< author ');
+  const { author, topic } = queryParams;
+  // console.log(author, '<< author');
+  // console.log(topic, '<< topic');
+  const whereConditions = {};
+  if (author) whereConditions['articles.author'] = author;
+  if (topic) whereConditions['articles.topic'] = topic;
+  // console.log(whereConditions, '<< whereConds');
+
   return connection
     .select(
       'articles.author',
@@ -15,7 +21,7 @@ exports.getArticles = (queryParams) => {
       'articles.votes',
     )
     .from('articles')
-    .where('articles.author', author)
+    .where(whereConditions)
     .leftJoin('comments', 'articles.article_id', '=', 'comments.article_id')
     .count('comments.comment_id as comment_count') // knex count after join !
     .groupBy('articles.article_id');

@@ -53,12 +53,20 @@ describe('/api', () => {
         );
       }));
 
-    it.only('GET: 200 query articles by the username i.e. author', () => request
+    it('GET: 200 query articles by the username i.e. author', () => request
       .get('/api/articles/?author=butter_bridge')
       .expect(200)
       .then(({ body }) => {
         expect(body.articles).to.be.an('array');
         body.articles.forEach(article => expect(article.author).to.equal('butter_bridge'));
+      }));
+
+    it('GET: 200 query filters articles by topic', () => request
+      .get('/api/articles/?topic=mitch')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).to.be.an('array');
+        body.articles.forEach(article => expect(article.topic).to.equal('mitch'));
       }));
   });
 });
@@ -69,6 +77,7 @@ describe('/api', () => {
   * `author`, which filters the articles by the username value specified in the query
   * `topic`, which filters the articles by the topic value specified in the query
   * `sort_by`, which sorts the articles by any valid column (defaults to date)
-  * `order`, which can be set to `asc` or `desc` for ascending or descending (defaults to descending)
-  * 
+  * `order`, which can be set to `asc` or `desc`
+  * for ascending or descending (defaults to descending)
+  *
 */
