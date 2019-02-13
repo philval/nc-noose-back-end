@@ -87,6 +87,8 @@ POST /api/articles/:article_id/comments
 PATCH /api/comments/:comment_id
 DELETE /api/comments/:comment_id
 
+// GOTO ERROR H.
+
 GET /api/users
 POST /api/users
 
