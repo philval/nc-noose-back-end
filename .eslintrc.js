@@ -16,5 +16,6 @@ module.exports = {
         "no-param-reassign": 0,
         "prefer-promise-reject-errors": 0,
         "no-console": 0,
+        "arrow-body-style": 0
     }
 };

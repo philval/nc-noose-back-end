@@ -16,14 +16,24 @@ describe('/api', () => {
 
   // get array of objects back
   describe('/topics', () => {
-    it('GET responds with 200 and an array', () => request
+    it('GET responds with 200 and an array of topics', () => request
       .get('/api/topics')
       .expect(200)
       .then(({ body }) => {
-        console.log(body);
         expect(body.topics).to.be.an('array');
         expect(body.topics[0]).to.contain.keys('slug', 'description');
         expect(body.topics).to.have.length(2); // test data !
+      }));
+
+    const topicData = { slug: 'Heaven', description: 'Hell on Earth' };
+
+    it('POST responds with 201 and topic object', () => request
+      .post('/api/topics')
+      .send(topicData)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.topic).to.be.an('object');
+        expect(body.topic).to.deep.equal(topicData);
       }));
   });
 });

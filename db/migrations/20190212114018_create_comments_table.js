@@ -1,5 +1,5 @@
 exports.up = function (knex, Promise) {
-  console.log('creating comments table...');
+  // console.log('creating comments table...');
   return knex.schema.createTable('comments', (commentsTable) => {
     commentsTable.increments('comment_id').primary(); // ok
     commentsTable.string('author').references('users.username'); // map created_by > author
@@ -11,7 +11,7 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-  console.log('dropping comments table...');
+  // console.log('dropping comments table...');
   return knex.schema.dropTable('comments');
 };
 /*
