@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     commentsTable.string('author').references('users.username'); // map created_by > author
     commentsTable.integer('article_id').references('articles.article_id'); // map belongs_to > article_id & lookup function
     commentsTable.integer('votes').defaultTo(0); // ok
-    commentsTable.date('created_at').notNullable(); // date conversion
+    commentsTable.timestamp('created_at').defaultTo(knex.fn.now()); // new POSTS
     commentsTable.text('body').notNullable(); // ok
   });
 };

@@ -53,7 +53,7 @@ describe('/api', () => {
         );
       }));
 
-    it('GET: 200 query articles by the username i.e. author', () => request
+    it('GET: 200 query returns articles by the username i.e. author', () => request
       .get('/api/articles/?author=butter_bridge')
       .expect(200)
       .then(({ body }) => {
@@ -61,12 +61,36 @@ describe('/api', () => {
         body.articles.forEach(article => expect(article.author).to.equal('butter_bridge'));
       }));
 
-    it('GET: 200 query filters articles by topic', () => request
+    it('GET: 200 query returns articles by topic', () => request
       .get('/api/articles/?topic=mitch')
       .expect(200)
       .then(({ body }) => {
         expect(body.articles).to.be.an('array');
         body.articles.forEach(article => expect(article.topic).to.equal('mitch'));
+      }));
+
+    it('GET: 200 query default sorts the articles by date asc', () => request
+      .get('/api/articles/')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).to.be.an('array');
+        expect(body.articles[0].created_at).to.equal('1974-11-26T12:21:54.171Z');
+      }));
+
+    it('GET: 200 query sorts the articles by author desc', () => request
+      .get('/api/articles/?sort_by=author&order=desc')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).to.be.an('array');
+        expect(body.articles[0].author).to.equal('rogersop');
+      }));
+    it('GET: 200 query sorts the articles by comment_count asc', () => request
+      .get('/api/articles/?sort_by=comment_count&order=asc')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).to.be.an('array');
+        expect(body.articles[0].comment_count).to.equal('0');
+        expect(body.articles[body.articles.length - 1].comment_count).to.equal('13'); // as its ASC
       }));
   });
 });

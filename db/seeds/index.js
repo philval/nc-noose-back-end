@@ -47,3 +47,5 @@ exports.seed = function (knex, Promise) {
       return knex('comments').insert(formattedComments); // explicit return
     });
 };
+
+// TODO move utils to new file
