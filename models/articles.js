@@ -1,7 +1,10 @@
 // ARTICLES MODEL
 const connection = require('../db/connection');
 
-exports.getArticles = () => {
+exports.getArticles = (queryParams) => {
+  // console.log(queryParams, '<< queryParams ');
+  const { author } = queryParams;
+  // console.log(author, '<< author ');
   return connection
     .select(
       'articles.author',
@@ -12,6 +15,7 @@ exports.getArticles = () => {
       'articles.votes',
     )
     .from('articles')
+    .where('articles.author', author)
     .leftJoin('comments', 'articles.article_id', '=', 'comments.article_id')
     .count('comments.comment_id as comment_count') // knex count after join !
     .groupBy('articles.article_id');

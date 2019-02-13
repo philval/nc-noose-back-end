@@ -15,7 +15,7 @@ describe('/api', () => {
   after(() => connection.destroy());
 
   describe('/topics', () => {
-    it('GET: 200 and an array of topic objects', () => request
+    it('GET: 200 an array of topic objects', () => request
       .get('/api/topics')
       .expect(200)
       .then(({ body }) => {
@@ -26,7 +26,7 @@ describe('/api', () => {
 
     const topicData = { slug: 'Heaven', description: 'Hell on Earth' };
 
-    it('POST: 201 and single topic object', () => request
+    it('POST: 201 a single topic object', () => request
       .post('/api/topics')
       .send(topicData)
       .expect(201)
@@ -36,8 +36,8 @@ describe('/api', () => {
       }));
   });
 
-  describe.only('/articles', () => {
-    it('GET: 200 and an array of article objects', () => request
+  describe('/articles', () => {
+    it('GET: 200 an array of article objects', () => request
       .get('/api/articles')
       .expect(200)
       .then(({ body }) => {
@@ -52,5 +52,23 @@ describe('/api', () => {
           'comment_count',
         );
       }));
+
+    it.only('GET: 200 query articles by the username i.e. author', () => request
+      .get('/api/articles/?author=butter_bridge')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).to.be.an('array');
+        body.articles.forEach(article => expect(article.author).to.equal('butter_bridge'));
+      }));
   });
 });
+
+
+/*
+##### Should accept queries
+  * `author`, which filters the articles by the username value specified in the query
+  * `topic`, which filters the articles by the topic value specified in the query
+  * `sort_by`, which sorts the articles by any valid column (defaults to date)
+  * `order`, which can be set to `asc` or `desc` for ascending or descending (defaults to descending)
+  * 
+*/
