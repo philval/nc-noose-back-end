@@ -1,0 +1,41 @@
+You are now connected to database "db_knews_dev" as user "pjv".
+    author    |                                         title                                         | article_id |  topic   | created_at | votes | comment_count 
+--------------+---------------------------------------------------------------------------------------+------------+----------+------------+-------+---------------
+ happyamy2016 | 22 Amazing open source React projects                                                 |          3 | coding   | 2017-07-21 |     0 |            10
+ tickle122    | A BRIEF HISTORY OF FOOD—NO BIG DEAL                                                   |         29 | cooking  | 2017-03-11 |     0 |            10
+ tickle122    | Agility Training Drills For Football Players                                          |         21 | football | 2016-10-06 |     0 |             8
+ cooljmessy   | An Introduction to JavaScript Object Notation (JSON) in JavaScript and .NET           |         10 | coding   | 2016-10-29 |     0 |             8
+ tickle122    | Defensive Metrics: Measuring the Intensity of a High Press                            |         22 | football | 2017-01-26 |     0 |             8
+ tickle122    | Designing Better JavaScript APIs                                                      |         11 | coding   | 2017-11-10 |     0 |             5
+ cooljmessy   | Express.js: A Server-Side JavaScript Framework                                        |          8 | coding   | 2016-06-30 |     0 |             7
+ jessjelly    | Game of talents: management lessons from top football coaches                         |         24 | football | 2017-04-01 |     0 |             5
+ weegembump   | HOW COOKING HAS CHANGED US                                                            |         26 | cooking  | 2017-04-21 |     0 |            11
+ grumpy19     | Halal food: Keeping pure and true                                                     |         32 | cooking  | 2017-08-16 |     0 |             5
+ happyamy2016 | High Altitude Cooking                                                                 |         28 | cooking  | 2018-05-27 |     0 |             5
+ weegembump   | History of FC Barcelona                                                               |         16 | football | 2018-02-17 |     0 |            16
+ tickle122    | History of Football                                                                   |         20 | football | 2017-10-10 |     0 |             5
+ grumpy19     | JavaScript’s Apply, Call, and Bind Methods are Essential for JavaScript Professionals |          6 | coding   | 2018-03-14 |     0 |            11
+ grumpy19     | Learn HTML5, CSS3, and Responsive WebSite Design in One Go                            |          9 | coding   | 2017-03-06 |     0 |             8
+ jessjelly    | Making sense of Redux                                                                 |          4 | coding   | 2017-12-24 |     0 |             9
+ jessjelly    | Please stop worrying about Angular 3                                                  |          5 | coding   | 2016-10-24 |     0 |             6
+ jessjelly    | Running a Node App                                                                    |          1 | coding   | 2016-08-18 |     0 |             8
+ weegembump   | Seafood substitutions are increasing                                                  |         33 | cooking  | 2018-05-30 |     0 |             6
+ cooljmessy   | Stone Soup                                                                            |         35 | cooking  | 2016-12-13 |     0 |            14
+ weegembump   | Sunday league football                                                                |         23 | football | 2016-11-18 |     0 |            14
+ weegembump   | Sweet potato & butternut squash soup with lemon & garlic toast                        |         25 | cooking  | 2017-08-18 |     0 |             4
+ grumpy19     | Thanksgiving Drinks for Everyone                                                      |         27 | cooking  | 2017-04-23 |     0 |            13
+ grumpy19     | The Notorious MSG’s Unlikely Formula For Success                                      |         34 | cooking  | 2017-08-16 |     0 |            11
+ grumpy19     | The People Tracking Every Touch, Pass And Tackle in the World Cup                     |         18 | football | 2018-03-28 |     0 |             8
+ jessjelly    | The Rise Of Thinking Machines: How IBM's Watson Takes On The World                    |          2 | coding   | 2017-07-20 |     0 |             6
+ tickle122    | The battle for Node.js security has only begun                                        |         12 | coding   | 2017-07-17 |     0 |             7
+ tickle122    | The vegan carnivore?                                                                  |         36 | cooking  | 2017-04-14 |     0 |             6
+ jessjelly    | Twice-Baked Butternut Squash Is the Thanksgiving Side Dish of Your Dreams             |         30 | cooking  | 2018-05-06 |     0 |             8
+ tickle122    | Using React Native: One Year Later                                                    |          7 | coding   | 2016-12-07 |     0 |             8
+ weegembump   | What does Jose Mourinho's handwriting say about his personality?                      |         13 | football | 2018-04-16 |     0 |             6
+ tickle122    | What to Cook This Week                                                                |         31 | cooking  | 2017-11-05 |     0 |            12
+ cooljmessy   | Which current Premier League manager was the best player?                             |         17 | football | 2016-07-12 |     0 |            12
+ happyamy2016 | Who Will Manage Your Club in 2021?                                                    |         14 | football | 2016-08-25 |     0 |             3
+ jessjelly    | Who are the most followed clubs and players on Instagram?                             |         19 | football | 2017-07-26 |     0 |            13
+ tickle122    | Why do England managers keep making the same mistakes?                                |         15 | football | 2017-03-13 |     0 |             4
+(36 rows)
+
