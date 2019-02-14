@@ -34,3 +34,22 @@ exports.addNewArticle = (newArticle) => {
     .into('articles')
     .returning('*'); // NB more columns than posted object
 };
+
+exports.getArticlebyID = (queryParams) => {
+  const { article_id } = queryParams;
+  return connection
+    .select(
+      'articles.author',
+      'articles.title',
+      'articles.article_id',
+      'articles.topic',
+      'articles.created_at',
+      'articles.votes',
+    )
+    .from('articles')
+    .where('articles.article_id', article_id)
+    .leftJoin('comments', 'articles.article_id', '=', 'comments.article_id')
+    .count('comments.comment_id as comment_count')
+    .groupBy('articles.article_id');
+  // .orderBy(sortColumn, sortOrder);
+};

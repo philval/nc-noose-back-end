@@ -24,15 +24,15 @@ describe('/api', () => {
         expect(body.topics).to.have.length(2); // test data
       }));
 
-    const topicData = { slug: 'Heaven', description: 'Hell on Earth' };
+    const postTopic = { slug: 'Heaven', description: 'Hell on Earth' };
 
     it('POST: 201 a single topic object and responds posted topic', () => request
       .post('/api/topics')
-      .send(topicData)
+      .send(postTopic)
       .expect(201)
       .then(({ body }) => {
         expect(body.topic).to.be.an('object');
-        expect(body.topic).to.deep.equal(topicData);
+        expect(body.topic).to.deep.equal(postTopic);
       }));
   });
 
@@ -93,36 +93,64 @@ describe('/api', () => {
         expect(body.articles[body.articles.length - 1].comment_count).to.equal('13'); // as its ASC
       }));
 
-    const articleData = { title: 'Cats vs Dogs', body: 'Meow vs Woof', topic: 'cats', author: 'butter_bridge' };
+    const postArticle = { title: 'Cats vs Dogs', body: 'Meow vs Woof', topic: 'cats', author: 'butter_bridge' };
 
     it('POST: 201 accepts body object and responds with posted article', () => request
       .post('/api/articles/')
       .expect(201)
-      .send(articleData)
+      .send(postArticle)
       .then(({ body }) => {
         expect(body.article).to.be.an('object');
         expect(body.article).to.contain.keys('title', 'body', 'topic', 'author');
         expect(body.article.author).to.equal('butter_bridge');
       }));
   });
+
+  // =here
+  describe('/articles/:article_id', () => {
+    it('GET: 200 query responds with a single article object', () => request
+      .get('/api/articles/1')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.article).to.be.an('object');
+        expect(body.article).to.contain.keys(
+          'author',
+          'title',
+          'article_id',
+          'topic',
+          'created_at',
+          'votes',
+          'comment_count',
+        );
+        expect(body.article.article_id).to.equal(1);
+        expect(body.article.votes).to.equal(100);
+        expect(body.article.comment_count).to.equal('13');
+      }));
+  });
 });
 
 /*
 
-POST /api/articles
+```http
+GET /api/articles/:article_id
 ```
 
-##### Request body accepts
-- an object containing the following properties:
+##### Responds with
+- an article object,  which should have the following properties:
+  * `author` which is the `username` from the users table
   * `title`
+  * `article_id`
   * `body`
   * `topic`
-  * `username`
+  * `created_at`
+  * `votes`
+  * `comment_count` which is the total count of all the comments with this article_id -
+  * - you should make use of knex queries in order to achieve this
 
-##### Responds with
-- the posted article
+***
 
 */
+
 
 /*
 
@@ -142,5 +170,13 @@ and please destructure single items from the arrays that they are in
 rather than: `{ article: [ { title: 'hello, etc... } ] }`
 i.e. you shouldn’t have to keep putting `[0]` in your tests for single items :slightly_smiling_face:
 
+
+*/
+
+/*
+
+Hi Phil, I hope you find this in the morning. I recall making a mistake when we were talking earlier.
+`405` -> method not allowed (i.e. no POST on the `/api/articles/:article_id` endpoint)
+`422` -> unprocessable entity (for instance, if a user tries to POST a topic, with a slug that already exists)
 
 */

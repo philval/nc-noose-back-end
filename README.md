@@ -71,11 +71,11 @@ Data has been provided for both testing and development environments so you will
 
 Your server should have the following end-points:
 ```http
-GET /api/topics
-POST /api/topics
+DONE GET /api/topics
+DONE POST /api/topics
 
-GET /api/articles
-POST /api/articles
+DONE GET /api/articles
+DONE POST /api/articles
 
 GET /api/articles/:article_id
 PATCH /api/articles/:article_id
