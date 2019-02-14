@@ -18,6 +18,7 @@ module.exports = {
         "no-console": 0,
         "arrow-body-style": 0,
         "object-curly-newline": 0,
-        "max-len": 0
+        "max-len": 0,
+        "consistent-return": 0
     }
 };

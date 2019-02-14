@@ -106,7 +106,6 @@ describe('/api', () => {
       }));
   });
 
-  // =here
   describe('/articles/:article_id', () => {
     it('GET: 200 query responds with a single article object', () => request
       .get('/api/articles/1')
@@ -114,9 +113,9 @@ describe('/api', () => {
       .then(({ body }) => {
         expect(body.article).to.be.an('object');
         expect(body.article).to.contain.keys(
+          'article_id',
           'author',
           'title',
-          'article_id',
           'topic',
           'created_at',
           'votes',
@@ -125,6 +124,44 @@ describe('/api', () => {
         expect(body.article.article_id).to.equal(1);
         expect(body.article.votes).to.equal(100);
         expect(body.article.comment_count).to.equal('13');
+      }));
+
+    it('PATCH: 200 increments the votes and responds with updated article', () => request
+      .patch('/api/articles/1')
+      .send({ inc_votes: 42 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.article).to.be.an('object');
+        expect(body.article).to.contain.keys(
+          'article_id',
+          'author',
+          'title',
+          'body',
+          'topic',
+          'created_at',
+          'votes',
+        );
+        expect(body.article.article_id).to.equal(1);
+        expect(body.article.votes).to.equal(142);
+        expect(body.article.author).to.equal('butter_bridge');
+      }));
+
+    it('PATCH: 200 decrements the votes and responds with updated article', () => request
+      .patch('/api/articles/1')
+      .send({ inc_votes: -42 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.article.article_id).to.equal(1);
+        expect(body.article.votes).to.equal(58);
+      }));
+
+    it('PATCH: 200 responds with unchanged article when votes = 0', () => request
+      .patch('/api/articles/1')
+      .send({ inc_votes: 0 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.article.article_id).to.equal(1);
+        expect(body.article.votes).to.equal(100);
       }));
   });
 });

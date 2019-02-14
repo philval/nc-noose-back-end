@@ -1,5 +1,5 @@
 // ARTICLES CONTROLLER
-const { getArticles, addNewArticle, getArticlebyID } = require('../models/articles');
+const { getArticles, postArticle, getArticlebyID, patchArticleByID } = require('../models/articles');
 
 exports.getArticles = (req, res, next) => {
   const queryParams = req.query;
@@ -9,7 +9,7 @@ exports.getArticles = (req, res, next) => {
 };
 
 exports.postArticle = (req, res, next) => {
-  addNewArticle(req.body)
+  postArticle(req.body)
     .then(([article]) => res.status(201).send({ article })) // Knex returns an array
     .catch(err => console.log(err) || next(err));
 };
@@ -17,6 +17,14 @@ exports.postArticle = (req, res, next) => {
 exports.getArticleByID = (req, res, next) => {
   const queryParams = req.params;
   getArticlebyID(queryParams)
+    .then(([article]) => res.status(200).send({ article }))
+    .catch(err => console.log(err) || next(err));
+};
+
+exports.patchArticleByID = (req, res, next) => {
+  const queryParams = req.params;
+  const reqBody = req.body;
+  patchArticleByID(queryParams, reqBody)
     .then(([article]) => res.status(200).send({ article }))
     .catch(err => console.log(err) || next(err));
 };

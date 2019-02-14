@@ -28,7 +28,7 @@ exports.getArticles = (queryParams) => {
 };
 
 // newTopic passed down from the controller
-exports.addNewArticle = (newArticle) => {
+exports.postArticle = (newArticle) => {
   return connection
     .insert(newArticle)
     .into('articles')
@@ -53,3 +53,26 @@ exports.getArticlebyID = (queryParams) => {
     .groupBy('articles.article_id');
   // .orderBy(sortColumn, sortOrder);
 };
+
+exports.patchArticleByID = (queryParams, reqBody) => {
+  const { article_id } = queryParams;
+  const votesNumber = reqBody.inc_votes;
+
+  if (votesNumber > 0) {
+    return connection('articles')
+      .where('article_id', article_id)
+      .increment('votes', votesNumber)
+      .returning('*');
+  }
+
+  if (votesNumber < 0) {
+    return connection('articles')
+      .where('article_id', article_id)
+      .decrement('votes', -votesNumber) // must be +ve
+      .returning('*');
+  }
+  return connection('articles')
+    .returning('*');
+};
+
+// .decrement(decrementObj)

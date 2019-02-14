@@ -1,7 +1,7 @@
 const apiRouter = require('express').Router(); // invoke
 
 const { getTopics, postTopic } = require('../controllers/topics');
-const { getArticles, postArticle, getArticleByID } = require('../controllers/articles');
+const { getArticles, postArticle, getArticleByID, patchArticleByID } = require('../controllers/articles');
 
 // TODO split routes
 
@@ -12,5 +12,6 @@ apiRouter.get('/articles', getArticles);
 apiRouter.post('/articles', postArticle);
 
 apiRouter.get('/articles/:article_id', getArticleByID);
+apiRouter.patch('/articles/:article_id', patchArticleByID);
 
 module.exports = apiRouter;
