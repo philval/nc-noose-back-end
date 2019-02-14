@@ -163,31 +163,27 @@ describe('/api', () => {
         expect(body.article.article_id).to.equal(1);
         expect(body.article.votes).to.equal(100);
       }));
+
+    it.only('DELETE: 204 responds with status and no content FALSE POSITIVE', () => request
+      .delete('/api/articles/2')
+      .expect(204)
+      .then(({ body }) => {
+        expect(body).to.deep.equal({});
+      }));
   });
 });
 
 /*
 
-```http
-GET /api/articles/:article_id
+DELETE /api/articles/:article_id
 ```
+##### Should
+- delete the given article by `article_id`
 
 ##### Responds with
-- an article object,  which should have the following properties:
-  * `author` which is the `username` from the users table
-  * `title`
-  * `article_id`
-  * `body`
-  * `topic`
-  * `created_at`
-  * `votes`
-  * `comment_count` which is the total count of all the comments with this article_id -
-  * - you should make use of knex queries in order to achieve this
-
-***
+- status 204 and no content
 
 */
-
 
 /*
 

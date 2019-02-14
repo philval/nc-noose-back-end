@@ -1,5 +1,5 @@
 // ARTICLES CONTROLLER
-const { getArticles, postArticle, getArticlebyID, patchArticleByID } = require('../models/articles');
+const { getArticles, postArticle, getArticlebyID, patchArticleByID, deleteArticleByID } = require('../models/articles');
 
 exports.getArticles = (req, res, next) => {
   const queryParams = req.query;
@@ -26,6 +26,13 @@ exports.patchArticleByID = (req, res, next) => {
   const reqBody = req.body;
   patchArticleByID(queryParams, reqBody)
     .then(([article]) => res.status(200).send({ article }))
+    .catch(err => console.log(err) || next(err));
+};
+
+exports.deleteArticleByID = (req, res, next) => {
+  const queryParams = req.params;
+  deleteArticleByID(queryParams)
+    .then(articles => /* console.log(article) || */ res.status(204).send({ articles }))
     .catch(err => console.log(err) || next(err));
 };
 
