@@ -3,15 +3,15 @@ You are now connected to database "db_knews_test" as user "pjv".
 ---------------+--------------------------------------------------------+------------+-------+----------------------------+-------+---------------
  rogersop      | Student SUES Mitch!                                    |          4 | mitch | 2006-11-18 12:21:54.171+00 |     0 |             0
  rogersop      | Seven inspirational thought leaders from Manchester UK |         10 | mitch | 1982-11-24 12:21:54.171+00 |     0 |             0
- icellusedkars | Z                                                      |          7 | mitch | 1994-11-21 12:21:54.171+00 |     0 |             0
- butter_bridge | Moustache                                              |         12 | mitch | 1974-11-26 12:21:54.171+00 |     0 |             0
- icellusedkars | Eight pug gifs that remind me of mitch                 |          3 | mitch | 2010-11-17 12:21:54.171+00 |     0 |             0
- icellusedkars | Does Mitch predate civilisation?                       |          8 | mitch | 1990-11-22 12:21:54.171+00 |     0 |             0
+ icellusedkars | A                                                      |          6 | mitch | 1998-11-20 12:21:54.171+00 |     0 |             0
  icellusedkars | Sony Vaio; or, The Laptop                              |          2 | mitch | 2014-11-16 12:21:54.171+00 |     0 |             0
  icellusedkars | Am I a cat?                                            |         11 | mitch | 1978-11-25 12:21:54.171+00 |     0 |             0
- icellusedkars | A                                                      |          6 | mitch | 1998-11-20 12:21:54.171+00 |     0 |             1
- butter_bridge | They're not exactly dogs, are they?                    |          9 | mitch | 1986-11-23 12:21:54.171+00 |     0 |             2
- rogersop      | UNCOVERED: catspiracy to bring down democracy          |          5 | cats  | 2002-11-19 12:21:54.171+00 |     0 |             2
- butter_bridge | Living in the shadow of a great man                    |          1 | mitch | 2018-11-15 12:21:54.171+00 |   100 |            13
+ icellusedkars | Z                                                      |          7 | mitch | 1994-11-21 12:21:54.171+00 |     0 |             0
+ butter_bridge | They're not exactly dogs, are they?                    |          9 | mitch | 1986-11-23 12:21:54.171+00 |     0 |             0
+ butter_bridge | Moustache                                              |         12 | mitch | 1974-11-26 12:21:54.171+00 |     0 |             0
+ icellusedkars | Eight pug gifs that remind me of mitch                 |          3 | mitch | 2010-11-17 12:21:54.171+00 |     0 |             0
+ butter_bridge | Living in the shadow of a great man                    |          1 | mitch | 2018-11-15 12:21:54.171+00 |   100 |             0
+ rogersop      | UNCOVERED: catspiracy to bring down democracy          |          5 | cats  | 2002-11-19 12:21:54.171+00 |     0 |             0
+ icellusedkars | Does Mitch predate civilisation?                       |          8 | mitch | 1990-11-22 12:21:54.171+00 |     0 |             0
 (12 rows)
 

@@ -26,7 +26,7 @@ describe('/api', () => {
 
     const topicData = { slug: 'Heaven', description: 'Hell on Earth' };
 
-    it('POST: 201 a single topic object', () => request
+    it('POST: 201 a single topic object and responds posted topic', () => request
       .post('/api/topics')
       .send(topicData)
       .expect(201)
@@ -92,16 +92,55 @@ describe('/api', () => {
         expect(body.articles[0].comment_count).to.equal('0');
         expect(body.articles[body.articles.length - 1].comment_count).to.equal('13'); // as its ASC
       }));
+
+    const articleData = { title: 'Cats vs Dogs', body: 'Meow vs Woof', topic: 'cats', author: 'butter_bridge' };
+
+    it('POST: 201 accepts body object and responds with posted article', () => request
+      .post('/api/articles/')
+      .expect(201)
+      .send(articleData)
+      .then(({ body }) => {
+        expect(body.article).to.be.an('object');
+        expect(body.article).to.contain.keys('title', 'body', 'topic', 'author');
+        expect(body.article.author).to.equal('butter_bridge');
+      }));
   });
 });
 
+/*
+
+POST /api/articles
+```
+
+##### Request body accepts
+- an object containing the following properties:
+  * `title`
+  * `body`
+  * `topic`
+  * `username`
+
+##### Responds with
+- the posted article
+
+*/
 
 /*
-##### Should accept queries
-  * `author`, which filters the articles by the username value specified in the query
-  * `topic`, which filters the articles by the topic value specified in the query
-  * `sort_by`, which sorts the articles by any valid column (defaults to date)
-  * `order`, which can be set to `asc` or `desc`
-  * for ascending or descending (defaults to descending)
-  *
+
+Mitch [3:36 PM]
+Hey @channel,
+It is really important that in your controllers, you are wrapping your data in objects:
+`res.status(200).send({ articles })` if you are responding with articles,
+and `res.status(200).send({ topic })` if you are responding with a single topic object
+Just something you need to be aware of before we review your code :slightly_smiling_face:
+
+Paul R - NC [3:53 PM]
+and please destructure single items from the arrays that they are in
+- e.g. getting an article by id should send:
+
+`{ article: { title: 'hello, etc... } }`
+
+rather than: `{ article: [ { title: 'hello, etc... } ] }`
+i.e. you shouldn’t have to keep putting `[0]` in your tests for single items :slightly_smiling_face:
+
+
 */
