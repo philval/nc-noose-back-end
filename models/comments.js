@@ -15,3 +15,17 @@ exports.getCommmentsByArticleID = (queryParams) => {
     .from('comments')
     .where('article_id', article_id);
 };
+
+exports.postCommmentsByArticleID = (reqParams, reqBody) => {
+  const { article_id } = reqParams;
+  const { author, body } = reqBody;
+  const newComment = {
+    article_id,
+    author,
+    body,
+  };
+  return connection
+    .insert(newComment)
+    .into('comments')
+    .returning('*');
+};

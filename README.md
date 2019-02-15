@@ -77,12 +77,12 @@ DONE POST /api/topics
 DONE GET /api/articles
 DONE POST /api/articles
 
-GET /api/articles/:article_id
-PATCH /api/articles/:article_id
-DELETE /api/articles/:article_id
+DONE GET /api/articles/:article_id
+DONE PATCH /api/articles/:article_id 
+XXXX DELETE /api/articles/:article_id
 
-GET /api/articles/:article_id/comments
-POST /api/articles/:article_id/comments
+DONE GET /api/articles/:article_id/comments
+DONE POST /api/articles/:article_id/comments
 
 PATCH /api/comments/:comment_id
 DELETE /api/comments/:comment_id

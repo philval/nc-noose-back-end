@@ -1,10 +1,15 @@
 // COMMENTS CONTROLLER
-const { getCommmentsByArticleID } = require('../models/comments');
+const { getCommmentsByArticleID, postCommmentsByArticleID } = require('../models/comments');
 
 exports.getCommmentsByArticleID = (req, res, next) => {
-  const queryParams = req.params;
-  getCommmentsByArticleID(queryParams)
+  getCommmentsByArticleID(req.params)
     .then(comments => res.status(200).send({ comments }))
+    .catch(err => console.log(err) || next(err));
+};
+
+exports.postCommmentsByArticleID = (req, res, next) => {
+  postCommmentsByArticleID(req.params, req.body)
+    .then(([comment]) => res.status(201).send({ comment }))
     .catch(err => console.log(err) || next(err));
 };
 

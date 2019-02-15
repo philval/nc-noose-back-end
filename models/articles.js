@@ -1,8 +1,8 @@
 // ARTICLES MODEL
 const connection = require('../db/connection');
 
-exports.getArticles = (queryParams) => {
-  const { author, topic, sort_by, order } = queryParams;
+exports.getArticles = (reqParams) => {
+  const { author, topic, sort_by, order } = reqParams;
   const whereConditions = {};
   if (author) whereConditions['articles.author'] = author;
   if (topic) whereConditions['articles.topic'] = topic;
@@ -35,8 +35,8 @@ exports.postArticle = (newArticle) => {
     .returning('*'); // NB more columns than posted object
 };
 
-exports.getArticlebyID = (queryParams) => {
-  const { article_id } = queryParams;
+exports.getArticlebyID = (reqParams) => {
+  const { article_id } = reqParams;
   return connection
     .select(
       'articles.author',
@@ -51,11 +51,10 @@ exports.getArticlebyID = (queryParams) => {
     .leftJoin('comments', 'articles.article_id', '=', 'comments.article_id')
     .count('comments.comment_id as comment_count')
     .groupBy('articles.article_id');
-  // .orderBy(sortColumn, sortOrder);
 };
 
-exports.patchArticleByID = (queryParams, reqBody) => {
-  const { article_id } = queryParams;
+exports.patchArticleByID = (reqParams, reqBody) => {
+  const { article_id } = reqParams;
   const votesNumber = reqBody.inc_votes;
 
   if (votesNumber > 0) {
@@ -75,13 +74,9 @@ exports.patchArticleByID = (queryParams, reqBody) => {
     .returning('*');
 };
 
-exports.deleteArticleByID = (queryParams) => {
-  const { article_id } = queryParams;
-  console.log(article_id, '<< article_id');
+exports.deleteArticleByID = (reqParams) => {
+  const { article_id } = reqParams;
   return connection('articles')
     .where('article_id', article_id)
     .delete();
 };
-
-
-// .decrement(decrementObj)

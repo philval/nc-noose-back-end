@@ -2,8 +2,7 @@
 const { getArticles, postArticle, getArticlebyID, patchArticleByID, deleteArticleByID } = require('../models/articles');
 
 exports.getArticles = (req, res, next) => {
-  const queryParams = req.query;
-  getArticles(queryParams)
+  getArticles(req.query)
     .then(articles => res.status(200).send({ articles }))
     .catch(err => console.log(err) || next(err));
 };
@@ -15,23 +14,19 @@ exports.postArticle = (req, res, next) => {
 };
 
 exports.getArticleByID = (req, res, next) => {
-  const queryParams = req.params;
-  getArticlebyID(queryParams)
+  getArticlebyID(req.params)
     .then(([article]) => res.status(200).send({ article }))
     .catch(err => console.log(err) || next(err));
 };
 
 exports.patchArticleByID = (req, res, next) => {
-  const queryParams = req.params;
-  const reqBody = req.body;
-  patchArticleByID(queryParams, reqBody)
+  patchArticleByID(req.params, req.body)
     .then(([article]) => res.status(200).send({ article }))
     .catch(err => console.log(err) || next(err));
 };
 
 exports.deleteArticleByID = (req, res, next) => {
-  const queryParams = req.params;
-  deleteArticleByID(queryParams)
+  deleteArticleByID(req.params)
     .then(articles => res.status(204).send({ articles }))
     .catch(err => console.log(err) || next(err));
 };

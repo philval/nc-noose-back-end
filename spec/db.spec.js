@@ -26,7 +26,7 @@ describe('/api', () => {
 
     const postTopic = { slug: 'Heaven', description: 'Hell on Earth' };
 
-    it('POST: 201 a single topic object and responds posted topic', () => request
+    it('POST: 201 accepts a single topic object and responds with the posted topic', () => request
       .post('/api/topics')
       .send(postTopic)
       .expect(201)
@@ -95,7 +95,7 @@ describe('/api', () => {
 
     const postArticle = { title: 'Cats vs Dogs', body: 'Meow vs Woof', topic: 'cats', author: 'butter_bridge' };
 
-    it('POST: 201 accepts body object and responds with posted article', () => request
+    it('POST: 201 accepts body object and responds with the posted article', () => request
       .post('/api/articles/')
       .expect(201)
       .send(postArticle)
@@ -126,7 +126,7 @@ describe('/api', () => {
         expect(body.article.comment_count).to.equal('13');
       }));
 
-    it('PATCH: 200 increments the votes and responds with updated article', () => request
+    it('PATCH: 200 increments the votes and responds with the updated article', () => request
       .patch('/api/articles/1')
       .send({ inc_votes: 42 })
       .expect(200)
@@ -187,22 +187,37 @@ describe('/api', () => {
         );
         expect(body.comments[0].article_id).to.equal(1);
       }));
+
+    const postComment = { author: 'butter_bridge', body: 'This is a test comment' };
+
+    it('POST: 201 accepts body object responds with the posted comment', () => request
+      .post('/api/articles/2/comments')
+      .expect(201)
+      .send(postComment)
+      .then(({ body }) => {
+        expect(body.comment).to.be.an('object');
+        expect(body.comment).to.contain.keys(
+          'comment_id',
+          'votes',
+          'created_at',
+          'author',
+          'body',
+        );
+        expect(body.comment.article_id).to.equal(2);
+        expect(body.comment.author).to.equal('butter_bridge');
+      }));
   });
 });
 
 /*
 
-GET /api/articles/:article_id/comments
-Responds with
-an array of comments for the given article_id of which each comment should have the following properties:
-comment_id
-votes
-created_at
-author which is the username from the users table
+POST /api/articles/:article_id/comments
+Request body accepts
+an object with the following properties:
+username
 body
-Accepts queries
-sort_by, which sorts the articles by any valid column (defaults to date)
-order, which can be set to asc or desc for ascending or descending (defaults to descending)
+Responds with
+the posted comment
 
 */
 
