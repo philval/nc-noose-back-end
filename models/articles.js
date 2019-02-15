@@ -79,9 +79,8 @@ exports.deleteArticleByID = (queryParams) => {
   const { article_id } = queryParams;
   console.log(article_id, '<< article_id');
   return connection('articles')
-    // .where('article_id', article_id)
-    // .delete();
-    .returning('*');
+    .where('article_id', article_id)
+    .delete();
 };
 
 

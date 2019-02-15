@@ -164,7 +164,7 @@ describe('/api', () => {
         expect(body.article.votes).to.equal(100);
       }));
 
-    it('DELETE: 204 responds with status and no content FALSE POSITIVE', () => request
+    it('DELETE: 204 responds with status and no content', () => request
       .delete('/api/articles/2')
       .expect(204)
       .then(({ body }) => {
@@ -172,7 +172,7 @@ describe('/api', () => {
       }));
   });
 
-  describe.only('/articles/:article_id/comments', () => {
+  describe('/articles/:article_id/comments', () => {
     it('GET: 200 query responds with an array of comments for given article_id', () => request
       .get('/api/articles/1/comments')
       .expect(200)
