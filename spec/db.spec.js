@@ -164,24 +164,45 @@ describe('/api', () => {
         expect(body.article.votes).to.equal(100);
       }));
 
-    it.only('DELETE: 204 responds with status and no content FALSE POSITIVE', () => request
+    it('DELETE: 204 responds with status and no content FALSE POSITIVE', () => request
       .delete('/api/articles/2')
       .expect(204)
       .then(({ body }) => {
         expect(body).to.deep.equal({});
       }));
   });
+
+  describe.only('/articles/:article_id/comments', () => {
+    it('GET: 200 query responds with an array of comments for given article_id', () => request
+      .get('/api/articles/1/comments')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).to.be.an('array');
+        expect(body.comments[0]).to.contain.keys(
+          'comment_id',
+          'votes',
+          'created_at',
+          'author',
+          'body',
+        );
+        expect(body.comments[0].article_id).to.equal(1);
+      }));
+  });
 });
 
 /*
 
-DELETE /api/articles/:article_id
-```
-##### Should
-- delete the given article by `article_id`
-
-##### Responds with
-- status 204 and no content
+GET /api/articles/:article_id/comments
+Responds with
+an array of comments for the given article_id of which each comment should have the following properties:
+comment_id
+votes
+created_at
+author which is the username from the users table
+body
+Accepts queries
+sort_by, which sorts the articles by any valid column (defaults to date)
+order, which can be set to asc or desc for ascending or descending (defaults to descending)
 
 */
 

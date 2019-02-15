@@ -1,16 +1,18 @@
 You are now connected to database "db_knews_test" as user "pjv".
-    author     |                         title                          | article_id | topic |         created_at         | votes 
----------------+--------------------------------------------------------+------------+-------+----------------------------+-------
- butter_bridge | Living in the shadow of a great man                    |          1 | mitch | 2018-11-15 12:21:54.171+00 |   100
- icellusedkars | Eight pug gifs that remind me of mitch                 |          3 | mitch | 2010-11-17 12:21:54.171+00 |     0
- rogersop      | Student SUES Mitch!                                    |          4 | mitch | 2006-11-18 12:21:54.171+00 |     0
- rogersop      | UNCOVERED: catspiracy to bring down democracy          |          5 | cats  | 2002-11-19 12:21:54.171+00 |     0
- icellusedkars | A                                                      |          6 | mitch | 1998-11-20 12:21:54.171+00 |     0
- icellusedkars | Z                                                      |          7 | mitch | 1994-11-21 12:21:54.171+00 |     0
- icellusedkars | Does Mitch predate civilisation?                       |          8 | mitch | 1990-11-22 12:21:54.171+00 |     0
- butter_bridge | They're not exactly dogs, are they?                    |          9 | mitch | 1986-11-23 12:21:54.171+00 |     0
- rogersop      | Seven inspirational thought leaders from Manchester UK |         10 | mitch | 1982-11-24 12:21:54.171+00 |     0
- icellusedkars | Am I a cat?                                            |         11 | mitch | 1978-11-25 12:21:54.171+00 |     0
- butter_bridge | Moustache                                              |         12 | mitch | 1974-11-26 12:21:54.171+00 |     0
-(11 rows)
+ comment_id |    author     | article_id | votes |         created_at         
+------------+---------------+------------+-------+----------------------------
+          2 | butter_bridge |          1 |    14 | 2016-11-22 12:36:03.389+00
+          3 | icellusedkars |          1 |   100 | 2015-11-23 12:36:03.389+00
+          4 | icellusedkars |          1 |  -100 | 2014-11-23 12:36:03.389+00
+          5 | icellusedkars |          1 |     0 | 2013-11-23 12:36:03.389+00
+          6 | icellusedkars |          1 |     0 | 2012-11-23 12:36:03.389+00
+          7 | icellusedkars |          1 |     0 | 2011-11-24 12:36:03.389+00
+          8 | icellusedkars |          1 |     0 | 2010-11-24 12:36:03.389+00
+          9 | icellusedkars |          1 |     0 | 2009-11-24 12:36:03.389+00
+         10 | icellusedkars |          1 |     0 | 2008-11-24 12:36:03.389+00
+         11 | icellusedkars |          1 |     0 | 2007-11-25 12:36:03.389+00
+         12 | icellusedkars |          1 |     0 | 2006-11-25 12:36:03.389+00
+         13 | icellusedkars |          1 |     0 | 2005-11-25 12:36:03.389+00
+         18 | butter_bridge |          1 |    16 | 2000-11-26 12:36:03.389+00
+(13 rows)
 

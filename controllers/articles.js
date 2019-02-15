@@ -4,7 +4,7 @@ const { getArticles, postArticle, getArticlebyID, patchArticleByID, deleteArticl
 exports.getArticles = (req, res, next) => {
   const queryParams = req.query;
   getArticles(queryParams)
-    .then(articles => /* console.log(articles) || */ res.status(200).send({ articles }))
+    .then(articles => res.status(200).send({ articles }))
     .catch(err => console.log(err) || next(err));
 };
 
@@ -32,7 +32,7 @@ exports.patchArticleByID = (req, res, next) => {
 exports.deleteArticleByID = (req, res, next) => {
   const queryParams = req.params;
   deleteArticleByID(queryParams)
-    .then(articles => /* console.log(article) || */ res.status(204).send({ articles }))
+    .then(articles => res.status(204).send({ articles }))
     .catch(err => console.log(err) || next(err));
 };
 
