@@ -207,38 +207,60 @@ describe('/api', () => {
         expect(body.comment.author).to.equal('butter_bridge');
       }));
   });
+
+  describe.only('/comments/:comment_id', () => {
+    it('PATCH: 200 increments the votes and responds with the updated comment', () => request
+      .patch('/api/comments/3')
+      .send({ inc_votes: 7 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comment).to.be.an('object');
+        expect(body.comment).to.contain.keys(
+          'comment_id',
+          'votes',
+          'created_at',
+          'author',
+          'body',
+        );
+        expect(body.comment.comment_id).to.equal(3);
+        expect(body.comment.votes).to.equal(107); // +100
+      }));
+
+    it('PATCH: 200 decrement the votes and responds with the updated comment', () => request
+      .patch('/api/comments/4')
+      .send({ inc_votes: -7 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comment.comment_id).to.equal(4);
+        expect(body.comment.votes).to.equal(-107); // -100
+      }));
+
+    it('PATCH: 200 responds with unchanged comment when votes = 0', () => request
+      .patch('/api/comments/1')
+      .send({ inc_votes: 0 })
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comment.comment_id).to.equal(1);
+        expect(body.comment.votes).to.equal(16); // +16
+      }));
+  });
 });
 
 /*
 
-POST /api/articles/:article_id/comments
+PATCH /api/comments/:comment_id
 Request body accepts
-an object with the following properties:
-username
-body
+an object in the form { inc_votes: newVote }
+
+newVote will indicate how much the votes property in the database should be updated by
+e.g.
+
+{ inc_votes : 1 } would increment the current article's vote property by 1
+
+{ inc_votes : -1 } would decrement the current article's vote property by 1
+
 Responds with
-the posted comment
-
-*/
-
-/*
-
-Mitch [3:36 PM]
-Hey @channel,
-It is really important that in your controllers, you are wrapping your data in objects:
-`res.status(200).send({ articles })` if you are responding with articles,
-and `res.status(200).send({ topic })` if you are responding with a single topic object
-Just something you need to be aware of before we review your code :slightly_smiling_face:
-
-Paul R - NC [3:53 PM]
-and please destructure single items from the arrays that they are in
-- e.g. getting an article by id should send:
-
-`{ article: { title: 'hello, etc... } }`
-
-rather than: `{ article: [ { title: 'hello, etc... } ] }`
-i.e. you shouldn’t have to keep putting `[0]` in your tests for single items :slightly_smiling_face:
-
+the updated comment
 
 */
 

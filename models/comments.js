@@ -29,3 +29,25 @@ exports.postCommmentsByArticleID = (reqParams, reqBody) => {
     .into('comments')
     .returning('*');
 };
+
+exports.patchCommentsByID = (reqParams, reqBody) => {
+  const { comment_id } = reqParams;
+  const votesNumber = reqBody.inc_votes;
+
+  if (votesNumber > 0) {
+    return connection('comments')
+      .where('comment_id', comment_id)
+      .increment('votes', votesNumber)
+      .returning('*');
+  }
+
+  if (votesNumber < 0) {
+    return connection('comments')
+      .where('comment_id', comment_id)
+      .decrement('votes', -votesNumber) // +ve
+      .returning('*');
+  }
+
+  return connection('comments')
+    .returning('*');
+};

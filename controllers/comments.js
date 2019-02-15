@@ -1,5 +1,5 @@
 // COMMENTS CONTROLLER
-const { getCommmentsByArticleID, postCommmentsByArticleID } = require('../models/comments');
+const { getCommmentsByArticleID, postCommmentsByArticleID, patchCommentsByID } = require('../models/comments');
 
 exports.getCommmentsByArticleID = (req, res, next) => {
   getCommmentsByArticleID(req.params)
@@ -10,6 +10,12 @@ exports.getCommmentsByArticleID = (req, res, next) => {
 exports.postCommmentsByArticleID = (req, res, next) => {
   postCommmentsByArticleID(req.params, req.body)
     .then(([comment]) => res.status(201).send({ comment }))
+    .catch(err => console.log(err) || next(err));
+};
+
+exports.patchCommentsByID = (req, res, next) => {
+  patchCommentsByID(req.params, req.body)
+    .then(([comment]) => res.status(200).send({ comment }))
     .catch(err => console.log(err) || next(err));
 };
 
