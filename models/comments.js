@@ -16,7 +16,7 @@ exports.getCommmentsByArticleID = (queryParams) => {
     .where('article_id', article_id);
 };
 
-exports.postCommmentsByArticleID = (reqParams, reqBody) => {
+exports.postCommmentByArticleID = (reqParams, reqBody) => {
   const { article_id } = reqParams;
   const { author, body } = reqBody;
   const newComment = {
@@ -30,7 +30,7 @@ exports.postCommmentsByArticleID = (reqParams, reqBody) => {
     .returning('*');
 };
 
-exports.patchCommentsByID = (reqParams, reqBody) => {
+exports.patchCommentByID = (reqParams, reqBody) => {
   const { comment_id } = reqParams;
   const votesNumber = reqBody.inc_votes;
 
@@ -50,4 +50,11 @@ exports.patchCommentsByID = (reqParams, reqBody) => {
 
   return connection('comments')
     .returning('*');
+};
+
+exports.deleteCommentByID = (reqParams) => {
+  const { comment_id } = reqParams;
+  return connection('comments')
+    .where('comment_id', comment_id)
+    .delete();
 };

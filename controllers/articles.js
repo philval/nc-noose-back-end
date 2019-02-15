@@ -27,7 +27,7 @@ exports.patchArticleByID = (req, res, next) => {
 
 exports.deleteArticleByID = (req, res, next) => {
   deleteArticleByID(req.params)
-    .then(articles => res.status(204).send({ articles }))
+    .then(article => res.status(204).send({ article }))
     .catch(err => console.log(err) || next(err));
 };
 

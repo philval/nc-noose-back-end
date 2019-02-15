@@ -4,7 +4,7 @@ const { getTopics, postTopic } = require('../controllers/topics');
 
 const { getArticles, postArticle, getArticleByID, patchArticleByID, deleteArticleByID } = require('../controllers/articles');
 
-const { getCommmentsByArticleID, postCommmentsByArticleID, patchCommentsByID } = require('../controllers/comments');
+const { getCommmentsByArticleID, postCommmentByArticleID, patchCommentByID, deleteCommentByID } = require('../controllers/comments');
 
 // TODO split routes
 
@@ -19,8 +19,9 @@ apiRouter.patch('/articles/:article_id', patchArticleByID);
 apiRouter.delete('/articles/:article_id', deleteArticleByID);
 
 apiRouter.get('/articles/:article_id/comments', getCommmentsByArticleID);
-apiRouter.post('/articles/:article_id/comments', postCommmentsByArticleID);
+apiRouter.post('/articles/:article_id/comments', postCommmentByArticleID);
 
-apiRouter.patch('/comments/:comment_id', patchCommentsByID);
+apiRouter.patch('/comments/:comment_id', patchCommentByID);
+apiRouter.delete('/comments/:comment_id', deleteCommentByID);
 
 module.exports = apiRouter;

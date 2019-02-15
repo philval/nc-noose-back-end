@@ -84,7 +84,7 @@ XXXX DELETE /api/articles/:article_id
 DONE GET /api/articles/:article_id/comments
 DONE POST /api/articles/:article_id/comments
 
-PATCH /api/comments/:comment_id
+DONE PATCH /api/comments/:comment_id
 DELETE /api/comments/:comment_id
 
 // GOTO ERROR H.

@@ -1,5 +1,5 @@
 // COMMENTS CONTROLLER
-const { getCommmentsByArticleID, postCommmentsByArticleID, patchCommentsByID } = require('../models/comments');
+const { getCommmentsByArticleID, postCommmentByArticleID, patchCommentByID, deleteCommentByID } = require('../models/comments');
 
 exports.getCommmentsByArticleID = (req, res, next) => {
   getCommmentsByArticleID(req.params)
@@ -7,15 +7,22 @@ exports.getCommmentsByArticleID = (req, res, next) => {
     .catch(err => console.log(err) || next(err));
 };
 
-exports.postCommmentsByArticleID = (req, res, next) => {
-  postCommmentsByArticleID(req.params, req.body)
+exports.postCommmentByArticleID = (req, res, next) => {
+  postCommmentByArticleID(req.params, req.body)
     .then(([comment]) => res.status(201).send({ comment }))
     .catch(err => console.log(err) || next(err));
 };
 
-exports.patchCommentsByID = (req, res, next) => {
-  patchCommentsByID(req.params, req.body)
+exports.patchCommentByID = (req, res, next) => {
+  patchCommentByID(req.params, req.body)
     .then(([comment]) => res.status(200).send({ comment }))
+    .catch(err => console.log(err) || next(err));
+};
+
+exports.deleteCommentByID = (req, res, next) => {
+  deleteCommentByID(req.params)
+  // confirmation = 1 i.e. row deleted
+    .then(confirmation => console.log(confirmation) || res.status(204).send(confirmation))
     .catch(err => console.log(err) || next(err));
 };
 

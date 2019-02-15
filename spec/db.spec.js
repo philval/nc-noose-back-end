@@ -243,6 +243,16 @@ describe('/api', () => {
         expect(body.comment.comment_id).to.equal(1);
         expect(body.comment.votes).to.equal(16); // +16
       }));
+
+    /*  18 | butter_bridge |          1 |    16 | 2000-11-26 12:36:03.389+00 | This morning, I showered for nine minutes. */
+
+    it('DELETE: 204 responds with status and no content', () => request
+      .delete('/api/comments/7')
+      .expect(204)
+      .then(({ body }) => {
+        // expect(body).to.deep.equal({});
+        // expect(body).to.equal(1);
+      }));
   });
 });
 
