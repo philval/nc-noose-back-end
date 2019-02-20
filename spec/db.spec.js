@@ -208,7 +208,7 @@ describe('/api', () => {
       }));
   });
 
-  describe.only('/comments/:comment_id', () => {
+  describe('/comments/:comment_id', () => {
     it('PATCH: 200 increments the votes and responds with the updated comment', () => request
       .patch('/api/comments/3')
       .send({ inc_votes: 7 })
