@@ -1,14 +1,14 @@
 // ARTICLES MODEL
 const connection = require('../db/connection');
 
-exports.getArticles = (reqParams) => {
-  const { author, topic, sort_by, order } = reqParams;
+exports.getArticles = (reqQuery) => {
+  const { author, topic, sort_by, order } = reqQuery;
   const whereConditions = {};
   if (author) whereConditions['articles.author'] = author;
   if (topic) whereConditions['articles.topic'] = topic;
 
   const sortColumn = sort_by || 'articles.created_at'; // default
-  const sortOrder = order || 'asc'; // default
+  const sortOrder = order || 'desc'; // default
 
   return connection
     .select(
@@ -24,7 +24,8 @@ exports.getArticles = (reqParams) => {
     .leftJoin('comments', 'articles.article_id', '=', 'comments.article_id')
     .count('comments.comment_id as comment_count') // knex count after join !
     .groupBy('articles.article_id')
-    .orderBy(sortColumn, sortOrder);
+    .orderBy(sortColumn, sortOrder)
+    .limit('10');
 };
 
 // newTopic passed down from the controller
@@ -39,9 +40,10 @@ exports.getArticlebyID = (reqParams) => {
   const { article_id } = reqParams;
   return connection
     .select(
+      'articles.article_id',
       'articles.author',
       'articles.title',
-      'articles.article_id',
+      'articles.body',
       'articles.topic',
       'articles.created_at',
       'articles.votes',

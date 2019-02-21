@@ -2,7 +2,7 @@
 const { getCommmentsByArticleID, postCommmentByArticleID, patchCommentByID, deleteCommentByID } = require('../models/comments');
 
 exports.getCommmentsByArticleID = (req, res, next) => {
-  getCommmentsByArticleID(req.params)
+  getCommmentsByArticleID(req.params, req.query)
     .then(comments => res.status(200).send({ comments }))
     .catch(err => console.log(err) || next(err));
 };

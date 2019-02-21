@@ -69,19 +69,21 @@ describe('/api', () => {
         body.articles.forEach(article => expect(article.topic).to.equal('mitch'));
       }));
 
-    it('GET: 200 query default sorts the articles by date asc', () => request
+    it('GET: 200 query default sorts the articles by date desc', () => request
       .get('/api/articles/')
       .expect(200)
       .then(({ body }) => {
         expect(body.articles).to.be.an('array');
-        expect(body.articles[0].created_at).to.equal('1974-11-26T12:21:54.171Z');
+        expect(body.articles[0].created_at).to.equal('2018-11-15T12:21:54.171Z');
       }));
 
-    it('GET: 200 query sorts the articles by author desc', () => request
-      .get('/api/articles/?sort_by=author&order=desc')
+    it('GET: 200 query sorts the articles by author default desc', () => request
+      .get('/api/articles/?sort_by=author')
       .expect(200)
       .then(({ body }) => {
         expect(body.articles).to.be.an('array');
+        expect(body.articles.length).to.equal(10);
+        // expect(body.articles[0].title).to.equal('Z');
         expect(body.articles[0].author).to.equal('rogersop');
       }));
     it('GET: 200 query sorts the articles by comment_count asc', () => request
@@ -90,7 +92,6 @@ describe('/api', () => {
       .then(({ body }) => {
         expect(body.articles).to.be.an('array');
         expect(body.articles[0].comment_count).to.equal('0');
-        expect(body.articles[body.articles.length - 1].comment_count).to.equal('13'); // as its ASC
       }));
 
     const postArticle = { title: 'Cats vs Dogs', body: 'Meow vs Woof', topic: 'cats', author: 'butter_bridge' };
@@ -116,6 +117,7 @@ describe('/api', () => {
           'article_id',
           'author',
           'title',
+          'body',
           'topic',
           'created_at',
           'votes',
@@ -188,6 +190,45 @@ describe('/api', () => {
         expect(body.comments[0].article_id).to.equal(1);
       }));
 
+    it('GET: 200 query responds with an array of comments for given article_id', () => request
+      .get('/api/articles/1/comments')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).to.be.an('array');
+        expect(body.comments[0]).to.contain.keys(
+          'comment_id',
+          'votes',
+          'created_at',
+          'author',
+          'body',
+        );
+        expect(body.comments[0].article_id).to.equal(1);
+      }));
+
+    it('GET: 200 query responds with an array of comments default order by Date desc', () => request
+      .get('/api/articles/1/comments')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).to.be.an('array');
+        expect(body.comments[0].created_at).to.equal('2016-11-22T12:36:03.389Z');
+      }));
+
+    it('GET: 200 query responds with an array of comments sorted by votes asc', () => request
+      .get('/api/articles/1/comments?sort_by=votes&order=asc')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).to.be.an('array');
+        expect(body.comments[0].votes).to.equal(-100);
+      }));
+
+    it('GET: 200 query can be SORT BY author default asc', () => request
+      .get('/api/articles/1/comments?sort_by=author')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).to.be.an('array');
+        expect(body.comments[0].author).to.equal('icellusedkars');
+      }));
+
     const postComment = { author: 'butter_bridge', body: 'This is a test comment' };
 
     it('POST: 201 accepts body object responds with the posted comment', () => request
@@ -244,15 +285,13 @@ describe('/api', () => {
         expect(body.comment.votes).to.equal(16); // +16
       }));
 
-    /*  18 | butter_bridge |          1 |    16 | 2000-11-26 12:36:03.389+00 | This morning, I showered for nine minutes. */
-
-    it('DELETE: 204 responds with status and no content', () => request
-      .delete('/api/comments/7')
-      .expect(204)
-      .then(({ body }) => {
-        // expect(body).to.deep.equal({});
-        // expect(body).to.equal(1);
-      }));
+    // it('DELETE: 204 responds with status and no content', () => request
+    //   .delete('/api/comments/7')
+    //   .expect(204)
+    //   .then(({ body }) => {
+    //     expect(body).to.deep.equal({});
+    //     expect(body).to.equal(1);
+    //   }));
   });
 });
 
