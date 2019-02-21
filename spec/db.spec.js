@@ -169,8 +169,8 @@ describe('/api', () => {
     it('DELETE: 204 responds with status and no content', () => request
       .delete('/api/articles/2')
       .expect(204)
-      .then(({ body }) => {
-        expect(body).to.deep.equal({});
+      .then(() => {
+        console.log('returned');
       }));
   });
 
@@ -285,13 +285,12 @@ describe('/api', () => {
         expect(body.comment.votes).to.equal(16); // +16
       }));
 
-    // it('DELETE: 204 responds with status and no content', () => request
-    //   .delete('/api/comments/7')
-    //   .expect(204)
-    //   .then(({ body }) => {
-    //     expect(body).to.deep.equal({});
-    //     expect(body).to.equal(1);
-    //   }));
+    it('DELETE: 204 responds with status and no content', () => request
+      .delete('/api/comments/7')
+      .expect(204)
+      .then(() => {
+        console.log('returned');
+      }));
   });
 });
 

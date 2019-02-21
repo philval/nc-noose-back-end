@@ -79,13 +79,13 @@ DONE POST /api/articles
 
 DONE GET /api/articles/:article_id
 DONE PATCH /api/articles/:article_id 
-XXXX DELETE /api/articles/:article_id
+DONE DELETE /api/articles/:article_id
 
 DONE GET /api/articles/:article_id/comments
 DONE POST /api/articles/:article_id/comments
 
 DONE PATCH /api/comments/:comment_id
-DELETE /api/comments/:comment_id
+XXXX DELETE /api/comments/:comment_id
 
 // GOTO ERROR H.
 

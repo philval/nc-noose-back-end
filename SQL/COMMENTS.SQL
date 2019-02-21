@@ -15,7 +15,8 @@ FROM comments
 WHERE article_id = 1
 -- GROUP BY articles.article_id
 -- ORDER BY comment_count ASC
-ORDER BY votes ASC
+ORDER BY votes DESC
+LIMIT 10
 ;
 
 --   * `comment_count` which is the total count of all the comments with this article_id - you should make use of knex queries in order to achieve this
