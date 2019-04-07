@@ -238,7 +238,59 @@ GET /api
 ### Prerequisites
 
 - A local installation of Node (latest)
+
+- a heroku account
+
 - Postgres App for OSX.  Download from https://postgresapp.com/ and follow the instructions. XXXX
+
+- a knexfile.js file in the project root folder as below.  DB_URL is the production DB URL sourced via heroku config:get (see package.json).
+
+```javascript
+
+const ENV = process.env.NODE_ENV || 'development';
+const { DB_URL } = process.env;
+
+const config = {
+  development: {
+    client: 'pg',
+    connection: {
+      database: 'db_knews_dev',
+    },
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds',
+    },
+  },
+  test: {
+    client: 'pg',
+    connection: {
+      database: 'db_knews_test',
+    },
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds',
+    },
+  },
+  production: {
+    client: 'pg',
+    connection: `${DB_URL}?ssl=true`,
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds',
+    },
+  },
+};
+
+module.exports = config[ENV];
+
+
+```
 
 
 ## Setup

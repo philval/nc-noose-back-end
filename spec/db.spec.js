@@ -36,6 +36,13 @@ describe('/api', () => {
         expect(body.topic).to.be.an('object');
         expect(body.topic).to.deep.equal(postTopic);
       }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .delete('/api/topics')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
   });
 
   // =articles
@@ -109,6 +116,13 @@ describe('/api', () => {
         expect(body.article).to.contain.keys('title', 'body', 'topic', 'author');
         expect(body.article.author).to.equal('butter_bridge');
       }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .delete('/api/articles')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
   });
 
   // =article
@@ -177,6 +191,13 @@ describe('/api', () => {
       .expect(204)
       .then(() => {
         console.log('returned');
+      }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .post('/api/articles/2')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
       }));
   });
 
@@ -255,6 +276,13 @@ describe('/api', () => {
         expect(body.comment.article_id).to.equal(2);
         expect(body.comment.author).to.equal('butter_bridge');
       }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .delete('/api/articles/2/comments')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
   });
 
   // =comment
@@ -301,11 +329,18 @@ describe('/api', () => {
       .then(() => {
         console.log('returned');
       }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .post('/api/comments/1')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
   });
 
   // =users
 
-  describe.only('/users', () => {
+  describe('/users', () => {
     it('GET: 200 an array of user objects', () => request
       .get('/api/users')
       .expect(200)
@@ -327,6 +362,13 @@ describe('/api', () => {
         expect(body.user).to.deep.equal(postUser);
       }));
 
+    it.only('returns 405 for method not allowed', () => request
+      .delete('/api/users')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
+
     it('GET: 200 query responds with a single user object', () => request
       .get('/api/users/butter_bridge')
       .expect(200)
@@ -340,6 +382,24 @@ describe('/api', () => {
         expect(body.user.username).to.equal('butter_bridge');
         expect(body.user.name).to.equal('jonny');
         expect(body.user.avatar_url).to.equal('https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg');
+      }));
+
+    it.only('returns 405 for method not allowed', () => request
+      .delete('/api/users/butter_bridge')
+      .expect(405)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('method not allowed');
+      }));
+  });
+
+  // =errors
+
+  describe('Errors', () => {
+    it.only('non-existent route responds with 404 Page not found', () => request
+      .get('/rubbish')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('Page not found');
       }));
   });
 });

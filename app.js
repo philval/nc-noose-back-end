@@ -15,4 +15,12 @@ app.use('/', (err, req, res, next) => {
   next(err);
 });
 
+app.use((err, req, res, next) => {
+  res.status(404).send({ msg: err.msg || 'not found' });
+});
+
+app.all('/*', (req, res) => {
+  res.status(404).send({ msg: 'Page not found' });
+});
+
 module.exports = app;
