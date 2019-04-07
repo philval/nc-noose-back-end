@@ -2,5 +2,4 @@
 node_modules
 knexfile.js
 config
-hogwartsql.sql
 output.txt
