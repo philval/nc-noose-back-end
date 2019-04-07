@@ -37,7 +37,23 @@ describe('/api', () => {
         expect(body.topic).to.deep.equal(postTopic);
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it.only('POST: 400 when missing a key', () => request
+      .post('/api/topics')
+      .send({}) // empty body
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('violates not null violation');
+      }));
+
+    it.only('POST: 400 when key is mispelt', () => request
+      .post('/api/topics')
+      .send({ slug: 'newtopic', desc: 'Rugby is best' }) // key is 'description' not 'desc'
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).to.equal('Bad request, missing data');
+      }));
+
+    it('returns 405 for method not allowed', () => request
       .delete('/api/topics')
       .expect(405)
       .then(({ body }) => {
@@ -117,7 +133,7 @@ describe('/api', () => {
         expect(body.article.author).to.equal('butter_bridge');
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .delete('/api/articles')
       .expect(405)
       .then(({ body }) => {
@@ -193,7 +209,7 @@ describe('/api', () => {
         console.log('returned');
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .post('/api/articles/2')
       .expect(405)
       .then(({ body }) => {
@@ -277,7 +293,7 @@ describe('/api', () => {
         expect(body.comment.author).to.equal('butter_bridge');
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .delete('/api/articles/2/comments')
       .expect(405)
       .then(({ body }) => {
@@ -330,7 +346,7 @@ describe('/api', () => {
         console.log('returned');
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .post('/api/comments/1')
       .expect(405)
       .then(({ body }) => {
@@ -362,7 +378,7 @@ describe('/api', () => {
         expect(body.user).to.deep.equal(postUser);
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .delete('/api/users')
       .expect(405)
       .then(({ body }) => {
@@ -384,7 +400,7 @@ describe('/api', () => {
         expect(body.user.avatar_url).to.equal('https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg');
       }));
 
-    it.only('returns 405 for method not allowed', () => request
+    it('returns 405 for method not allowed', () => request
       .delete('/api/users/butter_bridge')
       .expect(405)
       .then(({ body }) => {
@@ -395,7 +411,7 @@ describe('/api', () => {
   // =errors
 
   describe('Errors', () => {
-    it.only('non-existent route responds with 404 Page not found', () => request
+    it('non-existent route responds with 404 Page not found', () => request
       .get('/rubbish')
       .expect(404)
       .then(({ body }) => {
