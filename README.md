@@ -8,11 +8,13 @@ NC Noose has articles which are divided into topics. Each article has user curat
 
 The database is implemented in PSQL, and populated & queried using [Knex](https://knexjs.org).
 
-LIVE DEMO [https://nc-noose.netlify.com/](https://nc-noose.netlify.com/)
+FRONT-END DEMO [https://nc-noose.netlify.com/](https://nc-noose.netlify.com/)
 
-FRONTEND REPO [https://github.com/philval/fe2-nc-knews/](https://github.com/philval/fe2-nc-knews/)
+FRONT-END REPO [https://github.com/philval/fe2-nc-knews/](https://github.com/philval/fe2-nc-knews/)
 
-BACKEND REPO [https://github.com/philval/BE2-NC-Knews](https://github.com/philval/BE2-NC-Knews)
+BACK-END DEMO [https://nc-noose.herokuapp.com/api/articles](https://nc-noose.herokuapp.com/api/articles)
+
+BACK-END REPO [https://github.com/philval/BE2-NC-Knews](https://github.com/philval/BE2-NC-Knews)
 
 ## API Description
 
@@ -239,7 +241,7 @@ GET /api
 - Postgres App for OSX.  Download from https://postgresapp.com/ and follow the instructions. XXXX
 
 
-## setup
+## Setup
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 

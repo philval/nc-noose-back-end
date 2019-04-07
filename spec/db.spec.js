@@ -14,6 +14,8 @@ describe('/api', () => {
   // close connection after all it blocks have completed
   after(() => connection.destroy());
 
+  // =topics
+
   describe('/topics', () => {
     it('GET: 200 an array of topic objects', () => request
       .get('/api/topics')
@@ -35,6 +37,8 @@ describe('/api', () => {
         expect(body.topic).to.deep.equal(postTopic);
       }));
   });
+
+  // =articles
 
   describe('/articles', () => {
     it('GET: 200 an array of article objects', () => request
@@ -107,6 +111,8 @@ describe('/api', () => {
       }));
   });
 
+  // =article
+
   describe('/articles/:article_id', () => {
     it('GET: 200 query responds with a single article object', () => request
       .get('/api/articles/1')
@@ -173,6 +179,8 @@ describe('/api', () => {
         console.log('returned');
       }));
   });
+
+  // =comments
 
   describe('/articles/:article_id/comments', () => {
     it('GET: 200 query responds with an array of comments for given article_id', () => request
@@ -249,6 +257,8 @@ describe('/api', () => {
       }));
   });
 
+  // =comment
+
   describe('/comments/:comment_id', () => {
     it('PATCH: 200 increments the votes and responds with the updated comment', () => request
       .patch('/api/comments/3')
@@ -292,30 +302,44 @@ describe('/api', () => {
         console.log('returned');
       }));
   });
+
+  // =users
+
+  describe.only('/users', () => {
+    it('GET: 200 an array of user objects', () => request
+      .get('/api/users')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.users).to.be.an('array');
+        expect(body.users[0]).to.contain.keys('username', 'name', 'avatar_url');
+        expect(body.users).to.have.length(3); // test data
+        expect(body.users[0].username).to.equal('butter_bridge');
+      }));
+
+    const postUser = { username: 'philval', name: 'Philip Valentino', avatar_url: 'https://avatars2.githubusercontent.com/u/2657756?s=400&v=4' };
+
+    it('POST: 201 accepts a single user object and responds with the posted user', () => request
+      .post('/api/users')
+      .send(postUser)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.user).to.be.an('object');
+        expect(body.user).to.deep.equal(postUser);
+      }));
+
+    it('GET: 200 query responds with a single user object', () => request
+      .get('/api/users/butter_bridge')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.user).to.be.an('object');
+        expect(body.user).to.contain.keys(
+          'username',
+          'name',
+          'avatar_url',
+        );
+        expect(body.user.username).to.equal('butter_bridge');
+        expect(body.user.name).to.equal('jonny');
+        expect(body.user.avatar_url).to.equal('https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg');
+      }));
+  });
 });
-
-/*
-
-PATCH /api/comments/:comment_id
-Request body accepts
-an object in the form { inc_votes: newVote }
-
-newVote will indicate how much the votes property in the database should be updated by
-e.g.
-
-{ inc_votes : 1 } would increment the current article's vote property by 1
-
-{ inc_votes : -1 } would decrement the current article's vote property by 1
-
-Responds with
-the updated comment
-
-*/
-
-/*
-
-Hi Phil, I hope you find this in the morning. I recall making a mistake when we were talking earlier.
-`405` -> method not allowed (i.e. no POST on the `/api/articles/:article_id` endpoint)
-`422` -> unprocessable entity (for instance, if a user tries to POST a topic, with a slug that already exists)
-
-*/

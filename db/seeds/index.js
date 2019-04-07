@@ -4,7 +4,7 @@ const {
 
 const { formatArticles, formatComments } = require('./utils/utils');
 
-exports.seed = function (knex, Promise) {   
+exports.seed = function (knex, Promise) {
   return knex.migrate
     .rollback()
     .then(() => knex.migrate.latest()) // implicit return

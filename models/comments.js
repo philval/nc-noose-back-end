@@ -14,18 +14,6 @@ exports.getCommmentsByArticleID = (reqParams, reqQuery) => {
   const sortColumn = sort_by || 'comments.created_at'; // default
   const sortOrder = order || 'desc'; // default
 
-  /*
-  - an array of comments for the given `article_id` of which each comment should have the following properties:
-  * `comment_id`
-  * `votes`
-  * `created_at`
-  * `author` which is the `username` from the users table
-  * `body`
-
-##### Accepts queries
-  * `sort_by`, which sorts the articles by any valid column (defaults to date)
-  */
-
   return connection
     .select(
       'comment_id',
