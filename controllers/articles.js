@@ -15,7 +15,7 @@ exports.postArticle = (req, res, next) => {
 
 exports.getArticleByID = (req, res, next) => {
   getArticlebyID(req.params)
-    .then(([article]) => res.status(200).send({ article }))
+    .then(([article]) => (!article ? Promise.reject({ status: 404, msg: 'Article not found' }) : res.status(200).send({ article })))
     .catch(err => next(err));
 };
 

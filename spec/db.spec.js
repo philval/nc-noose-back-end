@@ -37,7 +37,7 @@ describe('/api', () => {
         expect(body.topic).to.deep.equal(postTopic);
       }));
 
-    it.only('POST: 400 when missing a key', () => request
+    it('POST: 400 when missing a key', () => request
       .post('/api/topics')
       .send({}) // empty body
       .expect(400)
@@ -45,7 +45,7 @@ describe('/api', () => {
         expect(body.msg).to.equal('violates not null violation');
       }));
 
-    it.only('POST: 400 when key is mispelt', () => request
+    it('POST: 400 when key is mispelt', () => request
       .post('/api/topics')
       .send({ slug: 'newtopic', desc: 'Rugby is best' }) // key is 'description' not 'desc'
       .expect(400)
@@ -164,6 +164,14 @@ describe('/api', () => {
         expect(body.article.comment_count).to.equal('13');
       }));
 
+    it('GET: 404 when article_id does not exists', () => request
+      .get('/api/articles/999')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).to.be.an('object');
+        expect(body.msg).to.equal('Article not found');
+      }));
+
     it('PATCH: 200 increments the votes and responds with the updated article', () => request
       .patch('/api/articles/1')
       .send({ inc_votes: 42 })
@@ -202,12 +210,20 @@ describe('/api', () => {
         expect(body.article.votes).to.equal(100);
       }));
 
+    // HERE
+    // it.only('PATCH: 404 when article_id does not exist', () => request
+    //   .patch('/api/articles/999')
+    //   .send({ inc_votes: 0 })
+    //   .expect(404)
+    //   .then(({ body }) => {
+    //     expect(body).to.be.an('object');
+    //     expect(body.msg).to.equal('Article not found');
+    //   }));
+
     it('DELETE: 204 responds with status and no content', () => request
       .delete('/api/articles/2')
       .expect(204)
-      .then(() => {
-        console.log('returned');
-      }));
+      .then(() => {}));
 
     it('returns 405 for method not allowed', () => request
       .post('/api/articles/2')
@@ -342,9 +358,7 @@ describe('/api', () => {
     it('DELETE: 204 responds with status and no content', () => request
       .delete('/api/comments/7')
       .expect(204)
-      .then(() => {
-        console.log('returned');
-      }));
+      .then(() => {}));
 
     it('returns 405 for method not allowed', () => request
       .post('/api/comments/1')

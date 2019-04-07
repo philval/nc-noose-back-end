@@ -12,14 +12,18 @@ app.use(cors());
 app.use('/api', apiRouter);
 
 app.use('/', (err, req, res, next) => {
-  console.error(err.stack);
+  // console.error(err.stack);
   next(err);
 });
 
 // return knex errors if possible
 app.use((err, req, res, next) => {
-  console.log(err); // XXXX
   handle400(err, req, res, next);
+});
+
+// 404s
+app.use((err, req, res, next) => {
+  res.status(404).send({ msg: err.msg || 'not found' });
 });
 
 // non existent route
