@@ -10,11 +10,11 @@ The database is implemented in PSQL, and populated & queried using [Knex](https:
 
 FRONT-END DEMO [https://nc-noose.netlify.com/](https://nc-noose.netlify.com/)
 
-FRONT-END REPO [https://github.com/philval/fe2-nc-knews/](https://github.com/philval/fe2-nc-knews/)
+FRONT-END REPO [https://github.com/philval/nc-noose-front-end](https://github.com/philval/nc-noose-front-end)
 
 BACK-END DEMO [https://nc-noose.herokuapp.com/api/articles](https://nc-noose.herokuapp.com/api/articles)
 
-BACK-END REPO [https://github.com/philval/BE2-NC-Knews](https://github.com/philval/BE2-NC-Knews)
+BACK-END REPO [https://github.com/philval/nc-noose-back-end](https://github.com/philval/nc-noose-back-end)
 
 
 ### Prerequisites
